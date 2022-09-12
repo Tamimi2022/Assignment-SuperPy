@@ -46,18 +46,6 @@ sell_parser.add_argument('-s', "--sell-price", type=float, dest="price", help="s
 sell_parser.add_argument('-q', "--quantity", type=int, dest="quantity", help="quantity of product", default=1)
 sell_parser.add_argument('-d', "--sell-date", type=str, dest="sell_date", help="product sell date (format YYYY-MM-DD)", required=True)
 
-'''# For Reports
-report_parser = subparsers.add_parser('report', help='Reports transactions')
-report_parser.add_argument('--bought-today', type=str, help='product bought today')
-report_parser.add_argument('--sold-today', type=str, help='product sold today', action='store')
-report_parser.add_argument('--profit-today', type=str, help='profit today', action='store')
-report_parser.add_argument('--bought-month', type=str, help='product bought in month', action='store')
-report_parser.add_argument('--sold-month', type=str, help='product sold in month', action='store')
-report_parser.add_argument('--profit-month', type=str, help='profit this month', action='store')
-report_parser.add_argument('--inventory', help='View inventory', action='store')
-report_parser.add_argument('--products', help='View products in', action='store')
-report_parser.add_argument('--bought', help='view Bought', action='store')
-report_parser.add_argument('--sold', help='view Sold', action='store')'''
 
 # For Export
 export_parser = subparsers.add_parser("export", help="Export selection of data on a specific date")
