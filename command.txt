@@ -1,0 +1,146 @@
+# For guideline 
+
+- Start Commands :
+Example:
+python main.py -h
+
+usage: SuperPy [-h] [-a] [-i] {buy,sell,export,profit,plot,reset} ...
+
+Welcome in my Supermarket
+
+positional arguments:
+  {buy,sell,export,profit,plot,reset}
+    buy                 Buy a product
+    sell                Sell a product
+    export              Export selection of data on a specific date
+    profit              Calculate profit on a specific date
+    plot                Plot bar graph in inventory, bought / sold list
+    reset               Reset selection of files or all files
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -a , --advance-time   advance time with days input: number of days
+  -i , --input-date     give set date input: YYYY-MM-DD
+
+- Buy Command 
+python main.py buy -h
+
+usage: SuperPy buy [-h] -p PRODUCT -b PRICE [-q QUANTITY] -d BUY_DATE -e EXP_DATE
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p PRODUCT, --product PRODUCT product name
+  -b PRICE, --buy-price PRICE buy price per product
+  -q QUANTITY, --quantity QUANTITY quantity of product
+  -d BUY_DATE, --buy-date BUY_DATE product buy date (format YYYY-MM-DD)
+  -e EXP_DATE, --exp-date EXP_DATE product expiration date (format YYYY-MM-DD)
+
+Example:
+python main.py buy --product Apple --buy-price 5 --buy-date 2022-01-05 --exp-date 2022-09-10
+python main.py buy --product Orange --buy-price 5 --buy-date 2022-01-05 --exp-date 2022-09-10
+python main.py buy --product Milk --buy-price 5 --buy-date 2022-01-05 --exp-date 2022-09-12
+python main.py buy --product Apple --buy-price 5 --quantity 10 --buy-date 2022-01-05 --exp-date 2022-09-10
+
+AppleQuantity is updating to 11
+ ID Product_name  Quantity Expiration_date
+  1        Apple        11      2022-09-10
+  2       Orange         1      2022-09-10
+  3         Milk         1      2022-09-12
+Updating inventory
+
+- Sell Command
+python main.py sell -h
+
+usage: SuperPy sell [-h] -p PRODUCT -s PRICE [-q QUANTITY] -d SELL_DATE
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p PRODUCT, --product PRODUCT product name
+  -s PRICE, --sell-price PRICE sell price per product
+  -q QUANTITY, --quantity QUANTITY quantity of product
+  -d SELL_DATE, --sell-date SELL_DATE product sell date (format YYYY-MM-DD)
+
+Example:
+python main.py sell --product Orange --sell-price 21 --sell-date 2023-12-05 
+python main.py sell --product Orange --sell-price 21 --quantity 3 --sell-date 2023-12-05
+
+Orange was added to SELL
+ ID Product_name  Quantity Expiration_date
+  1        Apple        11      2022-09-10
+  3         Milk         1      2022-09-12
+Updating Inventory for now:
+Orange is not show in inventory
+
+- Expoert Command
+python main.py export -h
+
+usage: SuperPy export [-h] --file {expired,bought,sold} --date DATE
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --file {expired,bought,sold} Data to be exported to .csv file
+  --date DATE           Choose date
+
+Examples:
+python main.py export --file expired --date 2024-04-15
+python main.py export --file bought --date 2022-09-02
+
+Data exported to bought.csv
+ ID Product_name  Buy_price  Quantity   Buy_date Expiration_date  Bought
+  1        Apple        5.0         1 2022-01-05      2022-09-10    True
+  2       Orange        5.0         1 2022-01-05      2022-09-10    True
+  3         Milk        5.0         1 2022-01-05      2022-09-12    True
+  1        Apple        5.0        10 2022-01-05      2022-09-10    True
+Bought product on:
+
+- Profit Command
+python main.py profit -h
+
+usage: SuperPy profit [-h] --date DATE
+
+optional arguments:
+  -h, --help   show this help message and exit
+  --date DATE  Choose date
+
+Examples:
+python main.py profit --date 2030-04-15
+python main.py profit --date 2020-06-26
+
+Products bought before or on: 2030-04-15
+   ID Product_name  Buy_price  ...  Expiration_date Bought Costs
+0   1        Apple        5.0  ...       2022-09-10   True   5.0
+1   2       Orange        5.0  ...       2022-09-10   True   5.0
+2   3         Milk        5.0  ...       2022-09-12   True   5.0
+3   1        Apple        5.0  ...       2022-09-10   True  50.0
+
+No products sold before or on: 2020-06-26
+No products bought before or on: 2020-06-26
+
+- Plot Command
+python main.py plot -h
+
+usage: SuperPy plot [-h] --file {bought,sold,inventory}
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --file {bought,sold,inventory} File plotted
+
+Examples:
+python main.py plot --file bought
+python main.py plot --file inventory
+
+show in bar Figure_1.png & Figure_2.png
+
+- Reset Command
+python main.py reset -h
+
+usage: SuperPy reset [-h] [--file {bought,sold,inventory,all}]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --file {bought,sold,inventory,all} Files resetted
+
+Examples:
+python main.py reset --file all
+python main.py reset --file inventory
+python main.py reset --bought
