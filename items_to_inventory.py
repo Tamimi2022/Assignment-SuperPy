@@ -2,11 +2,11 @@ import os
 import pandas as pd
 pd.options.mode.chained_assignment = None  # For ignoring the warning
 from buy_sell import b_recording, s_recording
-from date_record import date_record
+from date_record import is_date_record
 
 # For Buy
-def buy_items(id, product, price, quantity, buy_date, exp_date):
-    if (date_record(exp_date) == False) | (date_record(buy_date) == False):
+def buy_items_to_inventory(id, product, price, quantity, buy_date, exp_date):
+    if (is_date_record(exp_date) == False) | (is_date_record(buy_date) == False):
         print('Incorrect format date str')
         return
     if os.path.isfile('df_inventory.csv') == False: 
@@ -57,16 +57,16 @@ def buy_items(id, product, price, quantity, buy_date, exp_date):
             return df_inventory.to_csv('df_inventory.csv', index=False)
         
 # For Sell
-def sell_items(product, price, sell_date, quantity):
-    if date_record(sell_date) == False:
+def sell_items_to_inventory(product, price, sell_date, quantity):
+    if is_date_record(sell_date) == False:
         print('Incorrect format date str')
         return
     
     # Check inventory
     if os.path.isfile('df_inventory.csv') == False:
         print('Nothing product for now in inventory')
-        
-    # Check items
+    
+    # Check items with Product_name is present in inventory and if quantity is enough
     elif os.path.isfile('df_inventory.csv'):
         df_inventory = pd.read_csv('df_inventory.csv')
         df_inventory['Quantity'] = pd.to_numeric(df_inventory['Quantity'])
@@ -81,12 +81,12 @@ def sell_items(product, price, sell_date, quantity):
             # Sell Producs now
             file_index = file_index[0]
             
-            # Check Expiration date
+            
             if pd.to_datetime(df_inventory['Expiration_date'].iloc[file_index], format='%Y-%m-%d') > pd.to_datetime(sell_date, format='%Y-%m-%d'):
-                print('All product expired')
+                print('Product Item has been sold:')
             else:
                 id = df_inventory['ID'].iloc[file_index]
-                s_recording(id, product, price, quantity, sell_date)
+                s_recording(id, product, price,sell_date, quantity)
                 updating_quantity = int(df_inventory['Quantity'].iloc[file_index]) - int(quantity)
                 
                 # Deleted row when all product sold

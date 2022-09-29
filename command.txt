@@ -1,6 +1,10 @@
 # For guideline 
 
 - Start Commands :
+
+python main.py --advance-time 2
+Date OK: 2022-09-12
+
 Example:
 python main.py -h
 
@@ -40,12 +44,15 @@ python main.py buy --product Apple --buy-price 5 --buy-date 2022-01-05 --exp-dat
 python main.py buy --product Orange --buy-price 5 --buy-date 2022-01-05 --exp-date 2022-09-10
 python main.py buy --product Milk --buy-price 5 --buy-date 2022-01-05 --exp-date 2022-09-12
 python main.py buy --product Apple --buy-price 5 --quantity 10 --buy-date 2022-01-05 --exp-date 2022-09-10
+python main.py buy -p Kwark -b 1 -q 5 -d 2022-09-21 -e 2022-10-05
 
 AppleQuantity is updating to 11
  ID Product_name  Quantity Expiration_date
   1        Apple        11      2022-09-10
   2       Orange         1      2022-09-10
   3         Milk         1      2022-09-12
+  4        Kwark         5      2022-10-05
+Kwark added to Inventory
 Updating inventory
 
 - Sell Command
@@ -61,6 +68,7 @@ optional arguments:
   -d SELL_DATE, --sell-date SELL_DATE product sell date (format YYYY-MM-DD)
 
 Example:
+python main.py sell -p Kwark -s 3 -q 5 -d 2022-09-21
 python main.py sell --product Orange --sell-price 21 --sell-date 2023-12-05 
 python main.py sell --product Orange --sell-price 21 --quantity 3 --sell-date 2023-12-05
 
@@ -68,6 +76,7 @@ Orange was added to SELL
  ID Product_name  Quantity Expiration_date
   1        Apple        11      2022-09-10
   3         Milk         1      2022-09-12
+  4        Kwark         5      2022-10-05
 Updating Inventory for now:
 Orange is not show in inventory
 
@@ -83,15 +92,13 @@ optional arguments:
 
 Examples:
 python main.py export --file expired --date 2024-04-15
-python main.py export --file bought --date 2022-09-02
 
-Data exported to bought.csv
- ID Product_name  Buy_price  Quantity   Buy_date Expiration_date  Bought
-  1        Apple        5.0         1 2022-01-05      2022-09-10    True
-  2       Orange        5.0         1 2022-01-05      2022-09-10    True
-  3         Milk        5.0         1 2022-01-05      2022-09-12    True
-  1        Apple        5.0        10 2022-01-05      2022-09-10    True
-Bought product on:
+Data exported to expired.csv
+ ID Product_name  Quantity Expiration_date  Expired
+  1        Apple        11      2022-09-10     True
+  3         Milk         1      2022-09-12     True
+  3        Kwark         5      2022-10-05     True
+Expired products on selected date:
 
 - Profit Command
 python main.py profit -h
@@ -143,4 +150,3 @@ optional arguments:
 Examples:
 python main.py reset --file all
 python main.py reset --file inventory
-python main.py reset --bought

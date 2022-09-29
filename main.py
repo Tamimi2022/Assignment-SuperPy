@@ -5,16 +5,14 @@ from exporting import *
 from datetime import *
 from profit_record import *
 from plot_rec import plot_rec
-from buysell_items import buy_items, sell_items
+from items_to_inventory import buy_items_to_inventory, sell_items_to_inventory
 from reset import *
 import pandas as pd
 from date_record import *
 
-
 # Do not change these lines.
 __winc_id__ = "a2bc36ea784242e4989deb157d527ba0"
 __human_name__ = "superpy"
-
 
 # Your code below this line.
 def main():
@@ -83,7 +81,7 @@ if args.command is None:
             else:
                 change_date(args.input_date)
 if args.command == "buy":
-        buy_items(
+        buy_items_to_inventory(
             id=id,
             product=args.product,
             quantity=args.quantity,
@@ -92,7 +90,7 @@ if args.command == "buy":
             exp_date=args.exp_date
         )
 if args.command == "sell":
-        sell_items(
+        sell_items_to_inventory(
             product=args.product,
             price=args.price,
             quantity=args.quantity,
@@ -106,8 +104,7 @@ elif args.command == 'plot':
     plot_rec(args.file)
 elif args.command == 'reset':
     reset(args.file)
-    
-    
-
+        
+        
 if __name__ == "__main__":
     main()

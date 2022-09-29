@@ -1,5 +1,0 @@
-ID,Product_name,Buy_price,Quantity,Buy_date,Expiration_date,Bought
-1,Apple,5.0,1,2022-01-05,2022-09-10,True
-2,Orange,5.0,1,2022-01-05,2022-09-10,True
-3,Milk,5.0,1,2022-01-05,2022-09-12,True
-1,Apple,5.0,10,2022-01-05,2022-09-10,True

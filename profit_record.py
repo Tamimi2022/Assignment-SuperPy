@@ -1,13 +1,13 @@
 import os
 import pandas as pd
-from date_record import date_record
+from date_record import is_date_record
 
 # Calculate 
 def profit_record(input_date):
-    if date_record(input_date) == False: # Check if in correct format YYYY-MM-DD
+    if is_date_record(input_date) == False: # Check if in correct format YYYY-MM-DD
         print('Incorrect format date str')
         return
-    elif date_record(input_date) == True:
+    elif is_date_record(input_date) == True:
         input_date = pd.to_datetime(input_date)
     # Check Transactions 
     if os.path.isfile('df_sold.csv') == False:  # to Sold

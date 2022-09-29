@@ -26,7 +26,7 @@ def b_recording(id, product, price, quantity, buy_date, exp_date):
         return df_bought.to_csv('df_bought.csv', index=False)
     
 # For Sell recording
-def s_recording(id, product, price, quantity, sell_date):
+def s_recording(id, product, price,sell_date, quantity):
     
     #  Check recording sell , if not eixst Create one
     if os.path.isfile('df_sold.csv') == False:

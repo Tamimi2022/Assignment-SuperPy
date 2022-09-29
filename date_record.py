@@ -1,7 +1,7 @@
 from datetime import date, datetime, timedelta
 
 
-def date_record(date_string):
+def is_date_record(date_string):
     try:
         if date_string != datetime.strptime(date_string, '%Y-%m-%d').strftime('%Y-%m-%d'):
             raise ValueError
