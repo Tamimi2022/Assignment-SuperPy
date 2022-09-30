@@ -24,6 +24,7 @@ benefit:84.0
 profit:29.0
 
 To display the inventory or others not only .csv but also i used a .pdf
+And i also use Rich for showing Inventory table with green color
 
 When we buy or sell items, the item is placed in a CSV file. To provide these items with a Unique ID, I wrote functionality that the item will always have a unique ID.
 

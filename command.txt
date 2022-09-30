@@ -3,7 +3,7 @@
 - Start Commands :
 
 python main.py --advance-time 2
-Date OK: 2022-09-12
+Date OK: ____-__-__
 
 Example:
 python main.py -h
@@ -18,7 +18,8 @@ positional arguments:
     sell                Sell a product
     export              Export selection of data on a specific date
     profit              Calculate profit on a specific date
-    plot                Plot bar graph in inventory, bought / sold list
+    plot                Plot bar graph of product in inventory, bought / sold list
+    inventory           Product in inventory
     reset               Reset selection of files or all files
 
 optional arguments:
@@ -137,6 +138,19 @@ python main.py plot --file bought
 python main.py plot --file inventory
 
 show in bar Figure_1.png & Figure_2.png
+
+- Inventory Command
+python main.py inventory -h
+
+usage: SuperPy inventory [-h] [--now NOW]
+
+options:
+  -h, --help  show this help message and exit
+  --now NOW   Showing inventory at this moment
+
+Examples: For showing Inventory table:
+python main.py inventory
+
 
 - Reset Command
 python main.py reset -h

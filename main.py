@@ -9,6 +9,7 @@ from items_to_inventory import buy_items_to_inventory, sell_items_to_inventory
 from reset import *
 import pandas as pd
 from date_record import *
+from plot_rec import show_inventory
 
 # Do not change these lines.
 __winc_id__ = "a2bc36ea784242e4989deb157d527ba0"
@@ -55,8 +56,12 @@ profit_parser = subparsers.add_parser("profit", help="Calculate profit on a spec
 profit_parser.add_argument("--date", type=str, dest="date", help="Choose date", required=True)
 
 # For Plot
-plot_parser = subparsers.add_parser("plot", help="Plot bar graph in inventory, bought / sold list")
+plot_parser = subparsers.add_parser("plot", help="Plot bar graph of product in inventory, bought / sold list")
 plot_parser.add_argument("--file", type=str, dest="file", help="File plotted", choices=["bought", "sold", "inventory"], required=True)
+
+# For Inventory 
+inventory_parser = subparsers.add_parser('inventory', help='Product in inventory')
+inventory_parser.add_argument("--now", help="Showing inventory at this moment")
 
 # For Reset 
 reset_parser = subparsers.add_parser("reset", help="Reset selection of files or all files")
@@ -102,6 +107,8 @@ elif args.command == 'profit':
     profit_record(args.date)
 elif args.command == 'plot':
     plot_rec(args.file)
+elif args.command == 'inventory':
+    show_inventory(args.now)
 elif args.command == 'reset':
     reset(args.file)
         
