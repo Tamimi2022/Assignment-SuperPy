@@ -49,7 +49,7 @@ def exporting(selection, date):
     if selection == 'sold':
         if os.path.isfile('df_sold.csv') == False:
             print('No data')
-        elif os.path.isfile('df_inventory.csv'):
+        elif os.path.isfile('df_sold.csv'):
             df_sold = pd.read_csv('df_sold.csv')
             df_sold['Sell_date'] = pd.to_datetime(df_sold['Sell_date'])
             df_sold['Sold'] = df_sold['Sell_date'] <= date

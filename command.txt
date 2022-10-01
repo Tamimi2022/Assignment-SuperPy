@@ -114,15 +114,21 @@ Examples:
 python main.py profit --date 2030-04-15
 python main.py profit --date 2020-06-26
 
-Products bought before or on: 2030-04-15
-   ID Product_name  Buy_price  ...  Expiration_date Bought Costs
-0   1        Apple        5.0  ...       2022-09-10   True   5.0
-1   2       Orange        5.0  ...       2022-09-10   True   5.0
-2   3         Milk        5.0  ...       2022-09-12   True   5.0
-3   1        Apple        5.0  ...       2022-09-10   True  50.0
-
-No products sold before or on: 2020-06-26
-No products bought before or on: 2020-06-26
+Products bought before or on: 2022-12-26
+   ID Product_name  Buy_price  Quantity   Buy_date Expiration_date  Bought  Costs
+0   1        Apple        5.0         1 2022-01-05      2022-09-10    True    5.0
+1   2       Orange        5.0         1 2022-01-05      2022-09-10    True    5.0
+2   3         Milk        5.0         1 2022-01-05      2022-09-12    True    5.0
+3   1        Apple        5.0        10 2022-01-05      2022-09-10    True   50.0
+4   4        Kwark        1.0         5 2022-09-21      2022-10-05    True    5.0
+5   1        Apple        5.0         1 2022-01-05      2022-09-10    True    5.0
+Products sold before or on: 2022-12-26
+   ID Product_name  Sell_price  Quantity  Sell_date  Sold  Benefit
+0   4        Kwark         3.0         5 2022-09-21  True     15.0
+1   1        Apple         5.0         1 2022-01-05  True      5.0
+costs:75.0
+benefit:20.0
+profit:-55.0
 
 - Plot Command
 python main.py plot -h
@@ -149,8 +155,18 @@ options:
   --now NOW   Showing inventory at this moment
 
 Examples: For showing Inventory table:
-python main.py inventory
 
+python main.py inventory
+┏━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ ID ┃ Product Name ┃ Quantity ┃ Expiration Date ┃
+┡━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ 1  │ Apple        │ 11       │ 2022-09-10      │
+├────┼──────────────┼──────────┼─────────────────┤
+│ 2  │ Orange       │ 1        │ 2022-09-10      │
+├────┼──────────────┼──────────┼─────────────────┤
+│ 3  │ Milk         │ 1        │ 2022-09-12      │
+└────┴──────────────┴──────────┴─────────────────┘
+Showing Inventory in this moment: OK
 
 - Reset Command
 python main.py reset -h

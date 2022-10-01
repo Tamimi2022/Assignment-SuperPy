@@ -4,3 +4,4 @@ ID,Product_name,Buy_price,Quantity,Buy_date,Expiration_date
 3,Milk,5.0,1,2022-01-05,2022-09-12
 1,Apple,5.0,10,2022-01-05,2022-09-10
 4,Kwark,1.0,5,2022-09-21,2022-10-05
+1,Apple,5.0,1,2022-01-05,2022-09-10

@@ -48,4 +48,3 @@ def s_recording(id, product, price,sell_date, quantity):
         df_sold = df_sold.append(new_record, ignore_index=True)
         print(product + ' was added to SELL')
         return df_sold.to_csv('df_sold.csv', index=False)
-        

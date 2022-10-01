@@ -61,7 +61,7 @@ plot_parser.add_argument("--file", type=str, dest="file", help="File plotted", c
 
 # For Inventory 
 inventory_parser = subparsers.add_parser('inventory', help='Product in inventory')
-inventory_parser.add_argument("--now", help="Showing inventory at this moment")
+inventory_parser.add_argument("--now", dest='now' , help="Showing inventory at this moment")
 
 # For Reset 
 reset_parser = subparsers.add_parser("reset", help="Reset selection of files or all files")
