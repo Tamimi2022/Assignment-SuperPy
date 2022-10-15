@@ -36,3 +36,4 @@ def change_date(date):
         file.close
         date_set = datetime.strptime(date, '%Y-%m-%d').date()
         print('Date set to {}'.format(date_set))
+        

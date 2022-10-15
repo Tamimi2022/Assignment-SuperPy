@@ -3,6 +3,14 @@ import pandas as pd
 pd.options.mode.chained_assignment = None  # For ignoring the warning
 from buy_sell import b_recording, s_recording
 from date_record import is_date_record
+from rich.console import Console
+from rich.theme import Theme
+from rich.table import Table
+
+
+custom_theme = Theme({'OK': 'green', 'error': 'red'})
+console = Console(theme=custom_theme)
+Table(show_lines=True, header_style='green')
 
 # For Buy
 def buy_items_to_inventory(id, product, price, quantity, buy_date, exp_date):
@@ -18,8 +26,8 @@ def buy_items_to_inventory(id, product, price, quantity, buy_date, exp_date):
         
         # Append & Print
         df_inventory = pd.concat([df_inventory.append(new_record, ignore_index=True)])
-        print(df_inventory.to_string(index=False))
-        print(product + ' added to Inventory')
+        console.print(df_inventory.to_string(index=False))
+        console.print(product + ' added to Inventory')
         
         b_recording(id, product, price, quantity, buy_date, exp_date) # Add to list
         return df_inventory.to_csv('df_inventory.csv', index=False)
@@ -34,8 +42,8 @@ def buy_items_to_inventory(id, product, price, quantity, buy_date, exp_date):
             new_record = {'ID': id, 'Product_name': product, 'Quantity': quantity, 'Expiration_date': exp_date}
             
             df_inventory = df_inventory.append(new_record, ignore_index=True)
-            print(df_inventory.to_string(index=False))
-            print(product + ' added to Inventory')
+            console.print(df_inventory.to_string(index=False))
+            console.print(product + ' added to Inventory')
             
             # Add to Bought
             b_recording(id, product, price, quantity, buy_date, exp_date)
@@ -48,9 +56,9 @@ def buy_items_to_inventory(id, product, price, quantity, buy_date, exp_date):
             quantity_now = df_inventory['Quantity'].iloc[file_index]
             updating_quantity = int(quantity_now) + int(quantity)
             df_inventory['Quantity'].iloc[file_index] = updating_quantity
-            print(product + 'Quantity is updating to', updating_quantity)
-            print(df_inventory.to_string(index=False))
-            print('Updating inventory')
+            console.print(product + 'Quantity is updating to', updating_quantity)
+            console.print(df_inventory.to_string(index=False))
+            console.print('Updating inventory')
             
             
             b_recording(id, product, price, quantity, buy_date, exp_date) # Add items
@@ -64,15 +72,15 @@ def sell_items_to_inventory(product, price, sell_date, quantity):
     
     # Check inventory
     if os.path.isfile('df_inventory.csv') == False:
-        print('Nothing product for now in inventory')
+        console.print('Nothing product for now in inventory')
     
     # Check items with Product_name is present in inventory and if quantity is enough
     elif os.path.isfile('df_inventory.csv'):
         df_inventory = pd.read_csv('df_inventory.csv')
         df_inventory['Quantity'] = pd.to_numeric(df_inventory['Quantity'])
-        file_exist = ((df_inventory['Product_name'] == product) & (df_inventory['Quantity'] >= quantity)).any()
+        file_exist = ((df_inventory['Product_name'] == product) & ((df_inventory['Quantity'] >= quantity))).any()
         if file_exist == False:
-            print(product + ' ' + 'is not show in inventory')
+            console.print(product + ' ' + 'is not show in inventory')
             
           # File index when the product exist  
         elif file_exist:
@@ -83,7 +91,7 @@ def sell_items_to_inventory(product, price, sell_date, quantity):
             
             
             if pd.to_datetime(df_inventory['Expiration_date'].iloc[file_index], format='%Y-%m-%d') == pd.to_datetime(sell_date, format='%Y-%m-%d'):
-                print('Product Item has been sold:')
+                console.print('Product Item has been sold:')
             else:
                 id = df_inventory['ID'].iloc[file_index]
                 s_recording(id, product, price,sell_date, quantity)
@@ -92,10 +100,11 @@ def sell_items_to_inventory(product, price, sell_date, quantity):
                 # Deleted row when all product sold
                 if updating_quantity == 0:
                     df_inventory = df_inventory.drop(df_inventory.index[file_index])
-                    print(df_inventory.to_string(index=False))
-                    print('Updating Inventory for now:')
+                    console.print('Updating Inventory for now:')
+                    console.print(df_inventory.to_string(index=False))
                     return df_inventory.to_csv('df_inventory.csv', index=False)
                 else:
                     df_inventory['Quantity'].iloc[file_index] = updating_quantity
-                    print(df_inventory.to_string(index=False))
+                    console.print('Updating Inventory for now:')
+                    console.print(df_inventory.to_string(index=False))
                     return df_inventory.to_csv('df_inventory.csv', index=False)

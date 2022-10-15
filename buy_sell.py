@@ -1,5 +1,12 @@
 import os
 import pandas as pd
+from rich.console import Console
+from rich.theme import Theme
+from rich.table import Table
+
+custom_theme = Theme({'OK': 'green', 'error': 'red'})
+console = Console(theme=custom_theme)
+Table(show_lines=True, header_style='green')
 
 # For Buy recording
 def b_recording(id, product, price, quantity, buy_date, exp_date):
@@ -12,7 +19,7 @@ def b_recording(id, product, price, quantity, buy_date, exp_date):
         new_record = {'ID': id, 'Product_name': product, 'Buy_price': price, 'Quantity': quantity, 'Buy_date': buy_date, 'Expiration_date': exp_date}
         
         df_bought = df_bought.append(new_record, ignore_index=True)
-        print(product + ' was added to BUY')
+        console.print(product + ' was added to BUY')
         return df_bought.to_csv('df_bought.csv', index=False)
     
     elif os.path.isfile('df_bought.csv'):
@@ -22,7 +29,7 @@ def b_recording(id, product, price, quantity, buy_date, exp_date):
         new_record = {'ID': id, 'Product_name': product, 'Buy_price': price, 'Quantity': quantity, 'Buy_date': buy_date, 'Expiration_date': exp_date}
         
         df_bought = df_bought.append(new_record, ignore_index=True)
-        print(product + ' was added to BUY')
+        console.print(product + ' was added to BUY')
         return df_bought.to_csv('df_bought.csv', index=False)
     
 # For Sell recording
@@ -36,7 +43,7 @@ def s_recording(id, product, price,sell_date, quantity):
         new_record = {'ID': id, 'Product_name': product, 'Sell_price': price, 'Quantity': quantity, 'Sell_date': sell_date}
         
         df_sold = df_sold.append(new_record, ignore_index=True)
-        print(product + ' was added to SELL')
+        console.print(product + ' was added to SELL')
         return df_sold.to_csv('df_sold.csv', index=False)
     
     elif os.path.isfile('df_sold.csv'):
@@ -46,5 +53,5 @@ def s_recording(id, product, price,sell_date, quantity):
         new_record = {'ID': id, 'Product_name': product, 'Sell_price': price, 'Quantity': quantity, 'Sell_date': sell_date}
         
         df_sold = df_sold.append(new_record, ignore_index=True)
-        print(product + ' was added to SELL')
+        console.print(product + ' was added to SELL')
         return df_sold.to_csv('df_sold.csv', index=False)

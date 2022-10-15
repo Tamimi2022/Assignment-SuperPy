@@ -15,14 +15,14 @@ def plot_rec(input):
     
     # Check if .pdf exist or create one
     if os.path.isfile('./' + input + '.pdf') == False:
-        print('File ./' + input + '.pdf is created')
+        console.print('File ./' + input + '.pdf is created')
         plot.get_figure().savefig('./' + input + '.pdf', format='pdf')  #  With attribute 
         plt.show()  # Overview with Green colors
         
     # Remove the existing .pdf and generating new one
     elif os.path.isfile('./' + input + '.pdf') == True:
         os.remove('./' + input + '.pdf')
-        print('File ./' + input + '.pdf is updated')
+        console.print('File ./' + input + '.pdf is updated')
         plot.get_figure().savefig('./' + input + '.pdf', format='pdf')
         #  With attribute 
         plt.show()  # Overview with Green colors
@@ -36,7 +36,7 @@ def read_inventory(csv_file):
         f.close()
         return instock
         # Using Rich 
-custom_theme = Theme({'success': 'green', 'error': 'red'})
+custom_theme = Theme({'OK': 'green', 'error': 'red'})
 console = Console(theme=custom_theme)
 table_inventory = Table(show_lines=True, header_style='green')
 

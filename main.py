@@ -16,8 +16,7 @@ __winc_id__ = "a2bc36ea784242e4989deb157d527ba0"
 __human_name__ = "superpy"
 
 # Your code below this line.
-def main():
-    pass
+
 
 # The Parsers for Command-line
 # Creating an Argument Parsers
@@ -111,7 +110,3 @@ elif args.command == 'inventory':
     show_inventory(args.now)
 elif args.command == 'reset':
     reset(args.file)
-        
-        
-if __name__ == "__main__":
-    main()

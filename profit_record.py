@@ -1,19 +1,26 @@
 import os
 import pandas as pd
 from date_record import is_date_record
+from rich.console import Console
+from rich.theme import Theme
+from rich.table import Table
+
+custom_theme = Theme({'OK': 'green', 'error': 'red'})
+console = Console(theme=custom_theme)
+Table(show_lines=True, header_style='green')
 
 # Calculate 
 def profit_record(input_date):
     if is_date_record(input_date) == False: # Check if in correct format YYYY-MM-DD
-        print('Incorrect format date str')
+        console.print('Incorrect format date str')
         return
     elif is_date_record(input_date) == True:
         input_date = pd.to_datetime(input_date)
     # Check Transactions 
     if os.path.isfile('df_sold.csv') == False:  # to Sold
-        print('Nothing in Sold')
+        console.print('Nothing in Sold')
     if os.path.isfile('df_bought.csv') == False:  # to Bought
-        print('Nothing in Bought')
+        console.print('Nothing in Bought')
     elif os.path.isfile('df_sold.csv') & os.path.isfile('df_bought.csv'):
         df_sold = pd.read_csv('df_sold.csv')
         df_bought = pd.read_csv('df_bought.csv')
@@ -45,14 +52,14 @@ def profit_record(input_date):
         date = input_date.strftime('%Y-%m-%d')
         
         if int(benefit) == 0:
-            print("No products sold before or on:" + " " + date)
+            console.print("No products sold before or on:" + " " + date)
         if int(costs) == 0:
-            print("No products bought before or on:" + " " + date)
+            console.print("No products bought before or on:" + " " + date)
         else:
-            print("Products bought before or on:" + " " + date)
-            print(b_calculate)
-            print("Products sold before or on:" + " " + date)
-            print(s_calculate)
-            print("costs:" + str(costs))
-            print("benefit:" + str(benefit))
-            print("profit:" + str(profit))
+            console.print("Products bought before or on:" + " " + date)
+            console.print(b_calculate)
+            console.print("Products sold before or on:" + " " + date)
+            console.print(s_calculate)
+            console.print("costs:" + str(costs))
+            console.print("benefit:" + str(benefit))
+            console.print("profit:" + str(profit))
